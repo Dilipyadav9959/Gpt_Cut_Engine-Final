@@ -1,0 +1,8 @@
+faster-whisper>=1.2.1,<2
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+python-multipart>=0.0.20,<1
+numpy>=1.26,<3
+webrtcvad-wheels>=2.0.14,<3
+rapidfuzz>=3.10,<4
+pydantic>=2.8,<3

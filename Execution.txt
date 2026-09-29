@@ -1,0 +1,16 @@
+1.Activate the environment:
+          .venv\Scripts\Activate.ps1
+2.Put your new video in input folder:
+   input\test2.mp4
+
+3.Test video:
+python -m editron_cut_engine.cli `
+  --input "C:\Users\SHIVAKUMAR\Downloads\Editron_Cut_Engine_v0.1.0\input\test.mp4" `
+  --output "C:\Users\SHIVAKUMAR\Downloads\Editron_Cut_Engine_v0.1.0\output\test_reel_cut.mp4" `
+  --language auto `
+  --silence-mode vad `
+  --repetitions balanced `
+  --whisper-model large-v3 `
+  --device cpu `
+  --compute-type int8 `
+  --preview-json "C:\Users\SHIVAKUMAR\Downloads\Editron_Cut_Engine_v0.1.0\output\test_reel_edit.json"

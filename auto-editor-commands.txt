@@ -1,0 +1,247 @@
+AUTO-EDITOR WINDOWS SETUP & TEST COMMANDS
+===============================================
+
+Project folder:
+C:\dilipjava\FlutterDartPrograms\auto-editor
+
+Test video folder:
+C:\dilipjava\FlutterDartPrograms\auto-editor\test
+
+Test video:
+test.mp4
+
+
+1. VERIFY AUTO-EDITOR INSTALLATION
+----------------------------------
+
+Check which Auto-Editor executable Windows finds:
+
+where auto-editor
+
+or:
+
+where auto-editor.exe
+
+
+Check version:
+
+auto-editor.exe --version
+
+Expected:
+31.6.0
+
+
+Show help:
+
+auto-editor.exe --help
+
+
+2. CHECK FFMPEG
+---------------
+
+Run:
+
+ffmpeg -version
+
+If FFmpeg is installed and configured correctly, its version information will be displayed.
+
+
+3. GO TO THE TEST VIDEO FOLDER
+------------------------------
+
+Run:
+
+cd /d C:\dilipjava\FlutterDartPrograms\auto-editor\test
+
+
+4. FIRST TEST — PREVIEW
+-----------------------
+
+Preview what Auto-Editor plans to cut WITHOUT rendering the video:
+
+..\auto-editor.exe test.mp4 --preview
+
+
+5. PREVIEW WITH EXPLICIT AUDIO EDITING
+--------------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --edit audio --preview
+
+
+6. TEST A MORE AGGRESSIVE AUDIO THRESHOLD
+------------------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --edit "audio:threshold=8%" --preview
+
+
+7. TEST A LESS AGGRESSIVE AUDIO THRESHOLD
+-----------------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --edit "audio:threshold=3%" --preview
+
+
+8. TEST WITH 0.3 SECOND MARGIN
+------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --margin 0.3s --preview
+
+
+9. TEST WITH 0.5 SECOND MARGIN
+------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --margin 0.5s --preview
+
+
+10. TEST SMOOTHING
+------------------
+
+Run:
+
+..\auto-editor.exe test.mp4 --smooth 0.3s,0.15s --preview
+
+
+11. ACTUALLY RENDER THE AUTO-EDITED VIDEO
+-----------------------------------------
+
+Run:
+
+..\auto-editor.exe test.mp4
+
+
+12. CHECK GENERATED FILES
+-------------------------
+
+Run:
+
+dir
+
+
+13. OPEN THE GENERATED OUTPUT MANUALLY
+--------------------------------------
+
+After rendering, check the test folder for the generated output file.
+
+Compare:
+
+Original:
+test.mp4
+
+Auto-edited:
+the newly generated output file
+
+
+14. IMPORTANT TESTS FOR TALKING-HEAD REELS
+------------------------------------------
+
+Check the rendered video for:
+
+- Does Auto-Editor cut words?
+- Does it remove natural pauses?
+- Does speech sound robotic?
+- Are there awkward jumps?
+- Does it remove genuine silence?
+- Is the beginning clean?
+- Is the ending clean?
+- Are very short clips created?
+
+
+15. EDITRON TESTING PIPELINE
+----------------------------
+
+Current Auto-Editor stage:
+
+Original Reel
+    |
+    v
+Auto-Editor
+    |
+    +--> Detect active/silent audio
+    |
+    +--> Remove inactive sections
+    |
+    v
+Cleaned Reel
+
+
+Future Editron pipeline:
+
+Original Reel
+    |
+    +----------------------+
+    |                      |
+    v                      v
+Auto-Editor             Whisper
+    |                      |
+Silence/activity       Transcript
+detection              + timestamps
+    |                      |
+    +----------+-----------+
+               |
+               v
+          AI EDITOR
+               |
+               +--> filler detection
+               +--> repetition detection
+               +--> unnecessary sentence detection
+               +--> semantic cut decisions
+               |
+               v
+          FFmpeg
+               |
+               v
+          FINAL REEL
+
+
+16. USEFUL BASIC COMMANDS
+-------------------------
+
+Show version:
+
+auto-editor --version
+
+Show help:
+
+auto-editor --help
+
+Preview:
+
+auto-editor test.mp4 --preview
+
+Basic automatic edit:
+
+auto-editor test.mp4
+
+Preview audio editing:
+
+auto-editor test.mp4 --edit audio --preview
+
+Add margin:
+
+auto-editor test.mp4 --margin 0.5s --preview
+
+Set smoothing:
+
+auto-editor test.mp4 --smooth 0.3s,0.15s --preview
+
+
+IMPORTANT
+---------
+
+Do NOT use:
+
+pip install auto-editor
+
+For the current Windows setup, use the official standalone Auto-Editor binary from the GitHub Releases page.
+
+Current verified version in this setup:
+31.6.0
